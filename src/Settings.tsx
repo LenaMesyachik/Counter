@@ -19,10 +19,6 @@ export const Settings = ({maxCounter,ChangeError, setValue, startCounter,setStar
     const onChangeStartValue=(value:number)=>{
         if (value)
         setStartCounter(value)
-
-       /* else if (value<0)*/
-   /*     {
-            ChangeError()}*/
     }
     const onChangeMaxValue=(value:number)=>{
         setMaxCounter(value)
