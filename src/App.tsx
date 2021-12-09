@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Display} from "./Display";
 import {Settings} from "./Settings";
+import {useDispatch,} from "react-redux";
+
 
 function App() {
     const [counter, setCounter] = useState<number>(0);
-    const [maxCounter, setMaxCounter] = useState<number>(0)
-    const [startCounter, setStartCounter] = useState<number>(0)
     const [error, setError] = useState('')
+
+
+    const dispatch = useDispatch()
 
     const ChangeError = () => {
         setError('Incorrect value!')
@@ -23,31 +26,12 @@ function App() {
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify(counter))
     }, [counter])
-    const addCounter = () => {
-        if (counter < maxCounter) {
-            const newCounter = counter + 1
-            setCounter(newCounter)
-        }
-    }
-    const nullCounter = () => {
-        setCounter(startCounter)
-    }
-    const setValue = (startCounter: number) => {
-        if (startCounter !== maxCounter)
-            setCounter(startCounter)
-        else {
-            setError('Incorrect value!')
-        }
 
-    }
+
     return (
         <div className={'App'}>
-            <div><Settings ChangeError={ChangeError} setValue={setValue} maxCounter={maxCounter}
-                           startCounter={startCounter} setMaxCounter={setMaxCounter}
-                           setStartCounter={setStartCounter}/></div>
-            <div><Display counter={counter} error={error} addCounter={addCounter} nullCounter={nullCounter}
-                          maxCounter={maxCounter}
-                          startCounter={startCounter} setCounter={setCounter}/></div>
+            <div><Settings ChangeError={ChangeError}/></div>
+            <div><Display error={error}/></div>
         </div>
     );
 }
